@@ -51,8 +51,12 @@ const parseAccount = (data: AccountItems[]) => {
 
       // If end of array clean up duplicates and store last element as true to clean up later
       if (index === emailMap[email].length - 1) {
-        const newEms = ems.filter((c, index) => ems.indexOf(c) === index);
-        const newApp = apps.filter((c, index) => apps.indexOf(c) === index);
+        const newEms = ems.filter(
+          (email, index) => ems.indexOf(email) === index
+        );
+        const newApp = apps.filter(
+          (application, index) => apps.indexOf(application) === index
+        );
         if (stored[storedIndex] !== false) stored[storedIndex] = true;
 
         emailMap[email].forEach((storedIndex: number) => {
