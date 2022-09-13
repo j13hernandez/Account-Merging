@@ -6,7 +6,7 @@ interface AccountItems {
   name: string;
 }
 
-interface NewAccountItems {
+interface ReturnAccountItems {
   applications: string[];
   emails: string[];
   name: string;
@@ -20,7 +20,7 @@ interface Stored {
 }
 
 const parseAccount = (data: AccountItems[]) => {
-  const newAccountArray: NewAccountItems[] = [];
+  const newAccountArray: ReturnAccountItems[] = [];
   const emailMap: Email = {};
   const stored: Stored = {};
 
