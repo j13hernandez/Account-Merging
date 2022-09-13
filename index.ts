@@ -20,13 +20,13 @@ interface Stored {
 }
 
 const parseAccount = (data: AccountItems[]) => {
+  const newAccountArray: NewAccountItems[] = [];
   const emailMap: Email = {};
-  const newAccountItems: NewAccountItems[] = [];
   const stored: Stored = {};
 
   // Loops through each array item to populate return array
   data.forEach((account: AccountItems, index: number) => {
-    newAccountItems[index] = {
+    newAccountArray[index] = {
       applications: [account.application],
       emails: [...account.emails],
       name: account.name,
@@ -46,8 +46,8 @@ const parseAccount = (data: AccountItems[]) => {
     const apps: string[] = [];
     const ems: string[] = [];
     emailMap[email].forEach((storedIndex: number, index: number) => {
-      apps.push(...newAccountItems[storedIndex].applications);
-      ems.push(...newAccountItems[storedIndex].emails);
+      apps.push(...newAccountArray[storedIndex].applications);
+      ems.push(...newAccountArray[storedIndex].emails);
 
       // If end of array clean up duplicates and store last element as true to clean up later
       if (index === emailMap[email].length - 1) {
@@ -56,7 +56,7 @@ const parseAccount = (data: AccountItems[]) => {
         if (stored[storedIndex] !== false) stored[storedIndex] = true;
 
         emailMap[email].forEach((storedIndex: number) => {
-          newAccountItems[storedIndex] = {
+          newAccountArray[storedIndex] = {
             applications: newApp.sort(),
             emails: newEms.sort(),
             name: data[storedIndex].name,
@@ -73,11 +73,11 @@ const parseAccount = (data: AccountItems[]) => {
 
   reverseStored.forEach((index) => {
     if (!stored[index]) {
-      newAccountItems.splice(Number(index), 1);
+      newAccountArray.splice(Number(index), 1);
     }
   });
 
-  console.log(newAccountItems);
+  console.log(newAccountArray);
 };
 
 parseAccount(accounts);
