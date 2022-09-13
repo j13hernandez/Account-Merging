@@ -59,13 +59,11 @@ const parseAccount = (data: AccountItems[]) => {
         );
         if (stored[storedIndex] !== false) stored[storedIndex] = true;
 
-        emailMap[email].forEach((storedIndex: number) => {
-          newAccountArray[storedIndex] = {
-            applications: newApp.sort(),
-            emails: newEms.sort(),
-            name: data[storedIndex].name,
-          };
-        });
+        newAccountArray[storedIndex] = {
+          applications: newApp.sort(),
+          emails: newEms.sort(),
+          name: data[storedIndex].name,
+        };
       } else {
         stored[storedIndex] = false;
       }
